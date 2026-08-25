@@ -1,0 +1,6 @@
+.env
+.env.local
+.env.*.local
+api-key.txt
+API-key.txt
+openai-key.txt
