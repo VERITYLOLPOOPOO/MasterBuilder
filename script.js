@@ -13,6 +13,9 @@ const address=document.querySelector('#address');
 const locateBtn=document.querySelector('#locateBtn');
 const status=document.querySelector('#locationStatus');
 const coordinates=document.querySelector('#coordinates');
+const assemblyService=document.querySelector('#assemblyService');
+const wiringService=document.querySelector('#wiringService');
+const shipBuildService=document.querySelector('#shipBuildService');
 
 function calculate(){
   let price=Number(shipping.value);
@@ -24,6 +27,25 @@ function calculate(){
 }
 form.addEventListener('change',calculate);
 calculate();
+
+function normalizeCountry(value){return value.trim().toLowerCase().replace(/[^a-z]/g,'');}
+function isMorocco(value){const v=normalizeCountry(value);return ['morocco','maroc','المغرب'].includes(v);}
+
+shipBuildService.addEventListener('change',()=>{
+  if(shipBuildService.checked && wiringService.checked){
+    wiringService.checked=false;
+    alert('Ship & Build already covers the assembly workflow, so Wiring cannot be selected with it.');
+  }
+  calculate();
+});
+
+wiringService.addEventListener('change',()=>{
+  if(wiringService.checked && shipBuildService.checked){
+    shipBuildService.checked=false;
+    alert('Wiring and Ship & Build cannot be selected together.');
+  }
+  calculate();
+});
 
 pcpp.addEventListener('input',()=>{
   const value=pcpp.value.trim().toLowerCase();
@@ -57,6 +79,10 @@ form.addEventListener('submit',e=>{
     pcCreator.open=true;
   }else if(!document.querySelector('.priced:checked')){
     message='Choose at least one service before sending your request.';
+  }else if(shipBuildService.checked && wiringService.checked){
+    message='Ship & Build and Wiring cannot be selected together.';
+  }else if(assemblyService.checked && country.value.trim() && !isMorocco(country.value)){
+    message='PC Assembly is available only for customers in Morocco. For customers outside Morocco, choose Ship & Build instead.';
   }else{
     const hasManualAddress=country.value.trim() && city.value.trim() && address.value.trim();
     const hasLocation=coordinates.value.trim();
