@@ -2,7 +2,6 @@ const form=document.querySelector('#buildForm');
 const total=document.querySelector('#total');
 const bigTotal=document.querySelector('#bigTotal');
 const estimateField=document.querySelector('#estimateField');
-const shipping=document.querySelector('#shipping');
 const pcpp=document.querySelector('#pcpp');
 const pcppHelp=document.querySelector('#pcppHelp');
 const budget=document.querySelector('#budget');
@@ -18,7 +17,7 @@ const wiringService=document.querySelector('#wiringService');
 const shipBuildService=document.querySelector('#shipBuildService');
 
 function calculate(){
-  let price=Number(shipping.value);
+  let price=0;
   document.querySelectorAll('.priced:checked').forEach(item=>price+=Number(item.dataset.price));
   const formatted=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(price);
   total.textContent=formatted;
@@ -28,13 +27,13 @@ function calculate(){
 form.addEventListener('change',calculate);
 calculate();
 
-function normalizeCountry(value){return value.trim().toLowerCase().replace(/[^a-z]/g,'');}
-function isMorocco(value){const v=normalizeCountry(value);return ['morocco','maroc','المغرب'].includes(v);}
+function normalize(value){return value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function isMarrakech(value){const v=normalize(value);return v.includes('marrakech')||v.includes('marrakesh');}
 
 shipBuildService.addEventListener('change',()=>{
   if(shipBuildService.checked && wiringService.checked){
     wiringService.checked=false;
-    alert('Ship & Build already covers the assembly workflow, so Wiring cannot be selected with it.');
+    alert('Ship & Build cannot be selected together with Wiring.');
   }
   calculate();
 });
@@ -54,19 +53,52 @@ pcpp.addEventListener('input',()=>{
     pcppHelp.textContent='This needs to be a PCPartPicker URL.';
   }else{
     pcpp.setCustomValidity('');
-    pcppHelp.textContent='Already picked your parts? Paste the public list here.';
+    pcppHelp.textContent='If you already picked the parts, paste the public list here.';
   }
 });
 
+async function reverseGeocode(lat,lon){
+  const url=`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&addressdetails=1&zoom=18`;
+  const response=await fetch(url,{headers:{'Accept':'application/json'}});
+  if(!response.ok) throw new Error('Address lookup failed');
+  return response.json();
+}
+
 locateBtn.addEventListener('click',()=>{
-  if(!navigator.geolocation){status.textContent='Location is not supported by this browser. Please enter your address instead.';return;}
-  status.textContent='Requesting location…';
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const lat=pos.coords.latitude.toFixed(4),lon=pos.coords.longitude.toFixed(4);
+  if(!navigator.geolocation){
+    status.textContent='Location is not supported by this browser. Please enter your address manually.';
+    return;
+  }
+
+  status.textContent='Finding your location…';
+  locateBtn.disabled=true;
+
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    const lat=pos.coords.latitude.toFixed(6);
+    const lon=pos.coords.longitude.toFixed(6);
     coordinates.value=`${lat}, ${lon}`;
-    status.textContent='Current location added. You can leave the address fields blank.';
-    locateBtn.textContent='Location added ✓';
-  },()=>{status.textContent='Location permission was not granted. Please enter your address instead.';},{enableHighAccuracy:false,timeout:10000});
+
+    try{
+      status.textContent='Looking up your address…';
+      const data=await reverseGeocode(lat,lon);
+      const a=data.address||{};
+      country.value=a.country||'';
+      city.value=a.city||a.town||a.village||a.municipality||a.county||'';
+      const road=a.road||a.pedestrian||a.residential||a.neighbourhood||a.suburb||'';
+      const house=a.house_number||'';
+      address.value=[house,road].filter(Boolean).join(' ').trim() || data.display_name || '';
+      status.textContent='Address filled from your current location. Please check it before submitting.';
+      locateBtn.textContent='Location added ✓';
+    }catch(error){
+      status.textContent='Location found, but the street address could not be filled automatically. Please enter the address manually.';
+      locateBtn.textContent='Location found ✓';
+    }finally{
+      locateBtn.disabled=false;
+    }
+  },()=>{
+    status.textContent='Location permission was not granted. Please enter your address manually.';
+    locateBtn.disabled=false;
+  },{enableHighAccuracy:true,timeout:12000,maximumAge:60000});
 });
 
 form.addEventListener('submit',e=>{
@@ -81,13 +113,12 @@ form.addEventListener('submit',e=>{
     message='Choose at least one service before sending your request.';
   }else if(shipBuildService.checked && wiringService.checked){
     message='Ship & Build and Wiring cannot be selected together.';
-  }else if(assemblyService.checked && country.value.trim() && !isMorocco(country.value)){
-    message='PC Assembly is available only for customers in Morocco. For customers outside Morocco, choose Ship & Build instead.';
+  }else if(assemblyService.checked && !isMarrakech(city.value)){
+    message='PC Assembly is available only for customers in Marrakech. Choose Ship & Build if you are outside Marrakech.';
   }else{
-    const hasManualAddress=country.value.trim() && city.value.trim() && address.value.trim();
-    const hasLocation=coordinates.value.trim();
-    if(!hasManualAddress && !hasLocation){
-      message='Enter your country, city and street address, or use your current location.';
+    const hasAddress=country.value.trim() && city.value.trim() && address.value.trim();
+    if(!hasAddress){
+      message='Enter your country, city and street address, or use your current location to fill them automatically.';
     }
   }
 
