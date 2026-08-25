@@ -1,1 +1,124 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="MasterBuilder PC assembly and delivery services"><title>MasterBuilder | PC Building</title><link rel="stylesheet" href="style.css"></head><body><header><nav class="wrap"><a class="logo" href="#">MASTER<span>BUILDER</span></a><div><a href="#services">Services</a><a href="#delivery">Delivery</a><a href="#quote">Quote</a></div></nav></header><main><section class="hero wrap"><p class="tag">CUSTOM PC BUILDING</p><h1>Your parts.<br><span>Built right.</span></h1><p class="lead">You choose the hardware. MasterBuilder handles assembly, wiring, setup, and delivery.</p><a class="btn" href="#quote">PRICE MY BUILD</a></section><section id="services" class="section wrap"><p class="tag">SERVICES</p><h2>Choose what you need.</h2><div class="cards"><article><small>01</small><h3>PC Assembly</h3><p>Full PC hardware assembly using your compatible parts.</p><strong>$50</strong></article><article><small>02</small><h3>Wiring</h3><p>Clean cable routing and cable management.</p><strong>$75</strong></article><article><small>03</small><h3>Ship & Build</h3><p>Send in your parts and have the PC assembled before delivery.</p><strong>$150</strong></article></div></section><section id="delivery" class="dark section"><div class="wrap"><p class="tag">DELIVERY</p><h2>Distance pricing.</h2><div class="delivery"><div><span>Within 100 miles</span><b>FREE</b></div><div><span>Within 500 miles</span><b>$5</b></div><div><span>Another city</span><b>$50</b></div><div><span>Another country</span><b>$100</b></div><div><span>Another continent</span><b>$1,000</b></div></div><p class="note">Final delivery price and availability must be confirmed before parts are sent. Carrier, insurance, customs, taxes, or import fees may cost extra.</p></div></section><section id="quote" class="section wrap quote"><div><p class="tag">INSTANT ESTIMATE</p><h2>Price your build.</h2><p>Choose the work you need and your delivery range.</p></div><form id="calc"><label><input type="checkbox" value="50"> PC Assembly <b>$50</b></label><label><input type="checkbox" value="75"> Wiring <b>$75</b></label><label><input type="checkbox" value="150"> Ship & Build <b>$150</b></label><label>Delivery<select id="shipping"><option value="0">Within 100 miles — Free</option><option value="5">Within 500 miles — $5</option><option value="50">Another city — $50</option><option value="100">Another country — $100</option><option value="1000">Another continent — $1,000</option></select></label><div class="total"><span>Estimated total</span><strong id="total">$0</strong></div></form></section></main><footer><div class="wrap"><b>MASTERBUILDER</b><p>PC building services. Parts sold separately.</p></div></footer><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="MasterBuilder custom PC assembly, wiring and delivery services.">
+  <meta name="theme-color" content="#090a0d">
+  <title>MasterBuilder — Custom PC Building</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow glow-one"></div><div class="glow glow-two"></div>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="brand" href="#top"><span class="mark">MB</span><span>MasterBuilder</span></a>
+      <div class="nav-links"><a href="#services">Services</a><a href="#delivery">Delivery</a><a href="#order">Start a build</a></div>
+      <a class="nav-cta" href="#order">Get a quote</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> CUSTOM PC BUILDING</p>
+        <h1>Built clean.<br><em>Built yours.</em></h1>
+        <p class="lead">Send your PCPartPicker list. Choose assembly, wiring and delivery. MasterBuilder turns your parts list into a finished system.</p>
+        <div class="hero-actions"><a class="button primary" href="#order">Start your build</a><a class="button ghost" href="#services">See pricing</a></div>
+        <div class="trust-row"><span>Clear pricing</span><span>Custom builds</span><span>Worldwide requests</span></div>
+      </div>
+      <div class="hero-panel">
+        <div class="terminal-top"><i></i><i></i><i></i><span>BUILD_STATUS</span></div>
+        <div class="spec-line"><span>Assembly</span><b>$50</b></div>
+        <div class="spec-line"><span>Wiring</span><b>$75</b></div>
+        <div class="spec-line"><span>Ship & Build</span><b>$150</b></div>
+        <div class="pulse-card"><span class="pulse"></span><div><small>READY FOR REQUESTS</small><strong>MasterBuilder</strong></div></div>
+      </div>
+    </section>
+
+    <section id="services" class="section wrap">
+      <div class="section-head"><div><p class="eyebrow"><span></span> SERVICES</p><h2>Only pay for what you need.</h2></div><p>Start with assembly, add clean cable management, or send the parts in for a complete build.</p></div>
+      <div class="cards">
+        <article class="service-card"><div class="card-top"><span>01</span><b>$50</b></div><h3>PC Assembly</h3><p>Hardware assembly using your compatible parts and PCPartPicker list.</p><ul><li>Component installation</li><li>Basic build check</li><li>Clean final assembly</li></ul></article>
+        <article class="service-card featured"><div class="card-top"><span>02</span><b>$75</b></div><h3>Wiring</h3><p>Cable routing and cable management for a cleaner finished system.</p><ul><li>Power cable routing</li><li>Front-panel organization</li><li>Cleaner presentation</li></ul></article>
+        <article class="service-card"><div class="card-top"><span>03</span><b>$150</b></div><h3>Ship & Build</h3><p>Send in the parts and request a complete assembly before delivery.</p><ul><li>Parts received for build</li><li>Assembly service</li><li>Return delivery coordination</li></ul></article>
+      </div>
+    </section>
+
+    <section id="delivery" class="section delivery-section">
+      <div class="wrap">
+        <div class="section-head inverse"><div><p class="eyebrow"><span></span> DELIVERY</p><h2>Distance-based pricing.</h2></div><p>Choose the closest matching delivery range when you send your request.</p></div>
+        <div class="delivery-list">
+          <div><span>Local</span><p>Within 100 miles</p><strong>FREE</strong></div>
+          <div><span>Extended</span><p>Within 500 miles</p><strong>$5</strong></div>
+          <div><span>City</span><p>Another city</p><strong>$50</strong></div>
+          <div><span>International</span><p>Another country</p><strong>$100</strong></div>
+          <div><span>Intercontinental</span><p>Another continent</p><strong>$1,000</strong></div>
+        </div>
+        <p class="fineprint">These are service delivery estimates. Carrier costs, insurance, customs, taxes and import fees can be additional and are confirmed before any parts are sent.</p>
+      </div>
+    </section>
+
+    <section id="order" class="section wrap order-section">
+      <div class="order-intro">
+        <p class="eyebrow"><span></span> BUILD REQUEST</p>
+        <h2>Send the build.</h2>
+        <p>Drop your PCPartPicker link, tell us what you want done, and submit the request. You’ll see the estimate update before you send it.</p>
+        <div class="estimate-card"><small>CURRENT ESTIMATE</small><strong id="bigTotal">$0</strong><span>before carrier/customs costs</span></div>
+      </div>
+
+      <form id="buildForm" class="order-form" action="https://formsubmit.co/i.highkey.do.yt.gng@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New MasterBuilder PC Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://veritylolpoopoo.github.io/MasterBuilder/thanks.html">
+        <input type="hidden" id="estimateField" name="Estimated Total" value="$0">
+
+        <div class="form-grid two">
+          <label><span>Name</span><input name="Customer Name" autocomplete="name" placeholder="Your name" required></label>
+          <label><span>Email</span><input type="email" name="Customer Email" autocomplete="email" placeholder="you@example.com" required></label>
+        </div>
+
+        <label><span>PCPartPicker list</span><input id="pcpp" type="url" name="PCPartPicker Link" placeholder="https://pcpartpicker.com/list/..." required><small id="pcppHelp">Paste the public link to your parts list.</small></label>
+
+        <div class="field-title">Services</div>
+        <div class="option-grid">
+          <label class="option"><input class="priced" type="checkbox" name="PC Assembly" value="Yes — $50" data-price="50"><span><b>PC Assembly</b><small>Full component assembly</small></span><strong>$50</strong></label>
+          <label class="option"><input class="priced" type="checkbox" name="Wiring" value="Yes — $75" data-price="75"><span><b>Wiring</b><small>Cable management</small></span><strong>$75</strong></label>
+          <label class="option"><input class="priced" type="checkbox" name="Ship and Build" value="Yes — $150" data-price="150"><span><b>Ship & Build</b><small>Send parts for assembly</small></span><strong>$150</strong></label>
+        </div>
+
+        <div class="form-grid two">
+          <label><span>Country / region</span><input id="country" name="Country or Region" placeholder="Country or region" autocomplete="country-name" required></label>
+          <label><span>City</span><input id="city" name="City" placeholder="City" autocomplete="address-level2" required></label>
+        </div>
+
+        <div class="location-row">
+          <button class="location-btn" id="locateBtn" type="button">Use my current location</button>
+          <input id="coordinates" name="Approximate Coordinates" type="hidden">
+          <span id="locationStatus">Optional — your browser will ask permission.</span>
+        </div>
+
+        <label><span>Delivery range</span><select id="shipping" name="Delivery Range" required>
+          <option value="0" data-label="Within 100 miles — FREE">Within 100 miles — FREE</option>
+          <option value="5" data-label="Within 500 miles — $5">Within 500 miles — $5</option>
+          <option value="50" data-label="Another city — $50">Another city — $50</option>
+          <option value="100" data-label="Another country — $100">Another country — $100</option>
+          <option value="1000" data-label="Another continent — $1,000">Another continent — $1,000</option>
+        </select></label>
+
+        <label><span>Build notes</span><textarea name="Customer Notes" rows="5" placeholder="Case preferences, RGB, special requests, timing, anything else..."></textarea></label>
+
+        <div class="form-total"><div><small>ESTIMATED SERVICE TOTAL</small><strong id="total">$0</strong></div><button class="button primary submit" type="submit">Send build request</button></div>
+        <p class="form-note">Submitting sends your request details to MasterBuilder by email. Final pricing and shipping are confirmed before work starts.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><div class="brand"><span class="mark">MB</span><span>MasterBuilder</span></div><p>Custom PC building, wiring and delivery requests.</p><a href="#top">Back to top ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
