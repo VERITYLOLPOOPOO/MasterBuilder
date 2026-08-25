@@ -6,6 +6,7 @@ const shipping=document.querySelector('#shipping');
 const pcpp=document.querySelector('#pcpp');
 const pcppHelp=document.querySelector('#pcppHelp');
 const budget=document.querySelector('#budget');
+const pcCreator=document.querySelector('#pcCreator');
 const country=document.querySelector('#country');
 const city=document.querySelector('#city');
 const address=document.querySelector('#address');
@@ -27,7 +28,7 @@ calculate();
 pcpp.addEventListener('input',()=>{
   const value=pcpp.value.trim().toLowerCase();
   if(value && !value.includes('pcpartpicker.com')){
-    pcpp.setCustomValidity('Please enter a PCPartPicker link or leave this blank and enter your budget instead.');
+    pcpp.setCustomValidity('Please enter a PCPartPicker link or leave this blank and use PC Creator instead.');
     pcppHelp.textContent='This needs to be a PCPartPicker URL.';
   }else{
     pcpp.setCustomValidity('');
@@ -48,9 +49,12 @@ locateBtn.addEventListener('click',()=>{
 
 form.addEventListener('submit',e=>{
   let message='';
+  const usingPCPP=pcpp.value.trim();
+  const usingCreator=budget.value.trim();
 
-  if(!pcpp.value.trim() && !budget.value.trim()){
-    message='Add either a PCPartPicker list or your PC budget so MasterBuilder knows what to build.';
+  if(!usingPCPP && !usingCreator){
+    message='Paste a PCPartPicker list or open PC Creator and enter your PC budget.';
+    pcCreator.open=true;
   }else if(!document.querySelector('.priced:checked')){
     message='Choose at least one service before sending your request.';
   }else{
