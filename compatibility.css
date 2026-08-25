@@ -1,15 +1,4 @@
 .compatibility-box{margin:24px 0 8px;padding:18px;border:1px solid #34322d;background:#0f0f0e;display:grid;gap:14px}.compatibility-head{display:flex;align-items:center;gap:11px}.compatibility-head>div{display:flex;flex-direction:column;gap:3px}.compatibility-head b{font:600 14px 'Manrope',sans-serif}.compatibility-head small{font-size:10px;color:#807c74}.compatibility-dot{width:9px;height:9px;border-radius:50%;background:#6c6962;box-shadow:0 0 0 4px rgba(108,105,98,.12)}.compatibility-box[data-state="compatible"]{border-color:#43523c}.compatibility-box[data-state="compatible"] .compatibility-dot{background:#8fcf72;box-shadow:0 0 0 4px rgba(143,207,114,.12)}.compatibility-box[data-state="warning"]{border-color:#665b35}.compatibility-box[data-state="warning"] .compatibility-dot{background:#e5c45a;box-shadow:0 0 0 4px rgba(229,196,90,.12)}.compatibility-box[data-state="incompatible"]{border-color:#713f3f}.compatibility-box[data-state="incompatible"] .compatibility-dot{background:#ef6e6e;box-shadow:0 0 0 4px rgba(239,110,110,.12)}#compatibilityList{margin:0;padding-left:18px;color:#a8a39a;font-size:11px;line-height:1.65}#compatibilityList:empty{display:none}#compatibilityList li+li{margin-top:6px}.compat-compatible{color:#9dcb8a}.compat-warning{color:#d8c071}.compat-incompatible{color:#e98282}.compatibility-box .location-btn{justify-self:start}
 
-/* Cardboard is the material language of the site, not a named theme. */
-#editions{display:none!important}.nav-links a[href="#editions"]{display:none!important}
-
-/* Dark cardboard: subtle fibers, scuffs and uneven ink on all black surfaces. */
-body,.site-header,.order-form,.pc-creator,.compatibility-box{background-color:#11110f;background-image:repeating-linear-gradient(7deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px),repeating-linear-gradient(96deg,rgba(255,255,255,.012) 0 1px,transparent 1px 7px),radial-gradient(circle at 14% 22%,rgba(255,255,255,.022) 0 1px,transparent 1.5px),radial-gradient(circle at 73% 61%,rgba(0,0,0,.18) 0 1px,transparent 2px);background-size:auto,auto,23px 19px,31px 27px}
-.site-header{background-color:rgba(17,17,15,.96)}
-.order-form{background-color:#151513}.pc-creator{background-color:#121210}.compatibility-box{background-color:#0f0f0e}
-
-/* Cream cardboard: visible paper fibers and faint compression lines. */
-.delivery-section{background-color:#f2efe8;background-image:repeating-linear-gradient(2deg,rgba(78,65,43,.035) 0 1px,transparent 1px 5px),repeating-linear-gradient(91deg,rgba(78,65,43,.025) 0 1px,transparent 1px 9px),radial-gradient(circle at 18% 30%,rgba(111,87,55,.055) 0 1px,transparent 1.8px),radial-gradient(circle at 78% 68%,rgba(255,255,255,.55) 0 1px,transparent 1.8px);background-size:auto,auto,29px 23px,37px 31px}
-
-/* Keep the texture tactile but premium instead of noisy. */
-.hero,.section:not(.delivery-section),footer{position:relative}.hero:before,.section:not(.delivery-section):before,footer:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(90deg,transparent 0 48%,rgba(255,255,255,.018) 50%,transparent 52%),linear-gradient(0deg,transparent 0 48%,rgba(255,255,255,.012) 50%,transparent 52%);background-size:96px 96px;mix-blend-mode:soft-light}.hero>* ,.section>* ,footer>*{position:relative;z-index:1}
+/* Real cardboard texture supplied by the site owner. Dark areas use a black-toned version; light areas use a white-toned version. */
+:root{--cardboard-dark:url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAW
