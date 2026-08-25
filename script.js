@@ -5,6 +5,13 @@ const estimateField=document.querySelector('#estimateField');
 const shipping=document.querySelector('#shipping');
 const pcpp=document.querySelector('#pcpp');
 const pcppHelp=document.querySelector('#pcppHelp');
+const budget=document.querySelector('#budget');
+const country=document.querySelector('#country');
+const city=document.querySelector('#city');
+const address=document.querySelector('#address');
+const locateBtn=document.querySelector('#locateBtn');
+const status=document.querySelector('#locationStatus');
+const coordinates=document.querySelector('#coordinates');
 
 function calculate(){
   let price=Number(shipping.value);
@@ -20,31 +27,42 @@ calculate();
 pcpp.addEventListener('input',()=>{
   const value=pcpp.value.trim().toLowerCase();
   if(value && !value.includes('pcpartpicker.com')){
-    pcpp.setCustomValidity('Please enter a PCPartPicker link.');
+    pcpp.setCustomValidity('Please enter a PCPartPicker link or leave this blank and enter your budget instead.');
     pcppHelp.textContent='This needs to be a PCPartPicker URL.';
   }else{
     pcpp.setCustomValidity('');
-    pcppHelp.textContent='Paste the public link to your parts list.';
+    pcppHelp.textContent='Already picked your parts? Paste the public list here.';
   }
 });
 
-const locateBtn=document.querySelector('#locateBtn');
-const status=document.querySelector('#locationStatus');
-const coordinates=document.querySelector('#coordinates');
 locateBtn.addEventListener('click',()=>{
-  if(!navigator.geolocation){status.textContent='Location is not supported by this browser.';return;}
+  if(!navigator.geolocation){status.textContent='Location is not supported by this browser. Please enter your address instead.';return;}
   status.textContent='Requesting location…';
   navigator.geolocation.getCurrentPosition(pos=>{
     const lat=pos.coords.latitude.toFixed(4),lon=pos.coords.longitude.toFixed(4);
     coordinates.value=`${lat}, ${lon}`;
-    status.textContent='Location added to your request.';
+    status.textContent='Current location added. You can leave the address fields blank.';
     locateBtn.textContent='Location added ✓';
-  },()=>{status.textContent='Location permission was not granted. You can enter your city manually.';},{enableHighAccuracy:false,timeout:10000});
+  },()=>{status.textContent='Location permission was not granted. Please enter your address instead.';},{enableHighAccuracy:false,timeout:10000});
 });
 
 form.addEventListener('submit',e=>{
-  if(!document.querySelector('.priced:checked')){
+  let message='';
+
+  if(!pcpp.value.trim() && !budget.value.trim()){
+    message='Add either a PCPartPicker list or your PC budget so MasterBuilder knows what to build.';
+  }else if(!document.querySelector('.priced:checked')){
+    message='Choose at least one service before sending your request.';
+  }else{
+    const hasManualAddress=country.value.trim() && city.value.trim() && address.value.trim();
+    const hasLocation=coordinates.value.trim();
+    if(!hasManualAddress && !hasLocation){
+      message='Enter your country, city and street address, or use your current location.';
+    }
+  }
+
+  if(message){
     e.preventDefault();
-    alert('Choose at least one service before sending your request.');
+    alert(message);
   }
 });
