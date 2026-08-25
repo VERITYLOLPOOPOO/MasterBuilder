@@ -33,7 +33,7 @@
         <p class="panel-kicker">HOW IT WORKS</p>
         <ol class="process-list">
           <li><span>01</span><div><b>Send the brief</b><p>Share a PCPartPicker list or use PC Creator.</p></div></li>
-          <li><span>02</span><div><b>Choose the work</b><p>Assembly, wiring and delivery are selected separately.</p></div></li>
+          <li><span>02</span><div><b>Choose the work</b><p>Pick the service that matches where you are and what you need.</p></div></li>
           <li><span>03</span><div><b>Confirm before building</b><p>Parts and final shipping are agreed before work begins.</p></div></li>
         </ol>
         <div class="panel-foot"><span>Service pricing from</span><strong>$50</strong></div>
@@ -41,11 +41,11 @@
     </section>
 
     <section id="services" class="section wrap">
-      <div class="section-head"><div><p class="eyebrow">SERVICES</p><h2>Simple services. No mystery fees.</h2></div><p>Pick only what you need. Parts and carrier costs are separate from the service prices below.</p></div>
+      <div class="section-head"><div><p class="eyebrow">SERVICES</p><h2>Simple services. No mystery fees.</h2></div><p>Pick the option that matches your situation. Parts and carrier costs are separate from the service prices below.</p></div>
       <div class="cards">
-        <article class="service-card"><div class="card-top"><span>Assembly</span><b>$50</b></div><h3>PC Assembly</h3><p>Your compatible parts assembled into a finished system.</p><ul><li>Component installation</li><li>Basic build check</li><li>Clean final assembly</li></ul></article>
+        <article class="service-card"><div class="card-top"><span>Morocco only</span><b>$50</b></div><h3>PC Assembly</h3><p>Your compatible parts assembled into a finished system. This service is available only for customers in Morocco.</p><ul><li>Component installation</li><li>Basic build check</li><li>Clean final assembly</li></ul></article>
         <article class="service-card"><div class="card-top"><span>Finishing</span><b>$75</b></div><h3>Wiring</h3><p>Careful cable routing for a cleaner, easier-to-maintain build.</p><ul><li>Power cable routing</li><li>Front-panel organization</li><li>Presentation cleanup</li></ul></article>
-        <article class="service-card"><div class="card-top"><span>Full service</span><b>$150</b></div><h3>Ship & Build</h3><p>Send the parts in, have the system assembled, then arrange return delivery.</p><ul><li>Parts received for build</li><li>Assembly service</li><li>Return delivery coordination</li></ul></article>
+        <article class="service-card"><div class="card-top"><span>Send parts in</span><b>$150</b></div><h3>Ship & Build</h3><p>You send your parts to Morocco, we assemble the PC, then the finished system is shipped back to you.</p><ul><li>Parts received for assembly</li><li>Complete system build</li><li>Return shipping coordinated separately</li></ul></article>
       </div>
     </section>
 
@@ -109,10 +109,11 @@
 
         <div class="field-title">Services</div>
         <div class="option-grid">
-          <label class="option"><input class="priced" type="checkbox" name="PC Assembly" value="Yes — $50" data-price="50"><span><b>PC Assembly</b><small>Full component assembly</small></span><strong>$50</strong></label>
-          <label class="option"><input class="priced" type="checkbox" name="Wiring" value="Yes — $75" data-price="75"><span><b>Wiring</b><small>Cable management</small></span><strong>$75</strong></label>
-          <label class="option"><input class="priced" type="checkbox" name="Ship and Build" value="Yes — $150" data-price="150"><span><b>Ship & Build</b><small>Send parts for assembly</small></span><strong>$150</strong></label>
+          <label class="option"><input id="assemblyService" class="priced" type="checkbox" name="PC Assembly" value="Yes — $50" data-price="50"><span><b>PC Assembly</b><small>Morocco only</small></span><strong>$50</strong></label>
+          <label class="option"><input id="wiringService" class="priced" type="checkbox" name="Wiring" value="Yes — $75" data-price="75"><span><b>Wiring</b><small>Cable management</small></span><strong>$75</strong></label>
+          <label class="option"><input id="shipBuildService" class="priced" type="checkbox" name="Ship and Build" value="Yes — $150" data-price="150"><span><b>Ship & Build</b><small>Send parts to Morocco for assembly, then receive the finished PC back</small></span><strong>$150</strong></label>
         </div>
+        <p class="form-note">Ship & Build and Wiring cannot be selected together. PC Assembly is available only for customers in Morocco.</p>
 
         <div class="field-title">Delivery</div>
         <div class="form-grid two">
