@@ -28,28 +28,35 @@ function calculate(){
 form.addEventListener('change',calculate);
 calculate();
 
-function makeShipBuildExclusive(){
+function turnOffShipBuild(message){
+  if(shipBuildService.checked){
+    shipBuildService.checked=false;
+    alert(message);
+  }
+}
+
+shipBuildService.addEventListener('change',()=>{
   if(shipBuildService.checked){
     const conflicts=[];
     if(assemblyService.checked){assemblyService.checked=false;conflicts.push('PC Assembly');}
     if(wiringService.checked){wiringService.checked=false;conflicts.push('Wiring');}
-    if(conflicts.length){alert(`Ship & Build is a complete service, so ${conflicts.join(' and ')} ${conflicts.length>1?'were':'was'} turned off.`);}
-  }
-  calculate();
-}
-
-shipBuildService.addEventListener('change',makeShipBuildExclusive);
-assemblyService.addEventListener('change',()=>{
-  if(assemblyService.checked&&shipBuildService.checked){
-    shipBuildService.checked=false;
-    alert('PC Assembly cannot be selected with Ship & Build. PC Assembly can be combined with Wiring.');
+    if(conflicts.length){
+      alert(`Ship & Build is its own complete service, so ${conflicts.join(' and ')} ${conflicts.length>1?'were':'was'} turned off.`);
+    }
   }
   calculate();
 });
+
+assemblyService.addEventListener('change',()=>{
+  if(assemblyService.checked){
+    turnOffShipBuild('PC Assembly cannot be combined with Ship & Build. PC Assembly + Wiring is allowed.');
+  }
+  calculate();
+});
+
 wiringService.addEventListener('change',()=>{
-  if(wiringService.checked&&shipBuildService.checked){
-    shipBuildService.checked=false;
-    alert('Wiring cannot be selected with Ship & Build. Wiring can be combined with PC Assembly.');
+  if(wiringService.checked){
+    turnOffShipBuild('Wiring cannot be combined with Ship & Build. Wiring + PC Assembly is allowed.');
   }
   calculate();
 });
@@ -65,38 +72,53 @@ pcpp.addEventListener('input',()=>{
   }
 });
 
-async function geocodeWithNominatim(lat,lon){
-  const url=`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&addressdetails=1&zoom=18`;
-  const response=await fetch(url,{headers:{Accept:'application/json'}});
-  if(!response.ok) throw new Error('Nominatim failed');
+async function geocodeWithArcGIS(lat,lon){
+  const url=`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?location=${encodeURIComponent(lon)},${encodeURIComponent(lat)}&distance=100&outSR=4326&f=json`;
+  const response=await fetch(url,{mode:'cors'});
+  if(!response.ok) throw new Error('ArcGIS failed');
   const data=await response.json();
-  const a=data.address||{};
+  if(data.error||!data.address) throw new Error('ArcGIS returned no address');
+  const a=data.address;
+  const street=a.Address||a.Match_addr||'';
   return {
-    country:a.country||'',
-    city:a.city||a.town||a.village||a.municipality||a.county||'',
-    address:[a.house_number||'',a.road||a.pedestrian||a.residential||a.neighbourhood||a.suburb||''].filter(Boolean).join(' ').trim()||data.display_name||''
+    country:a.CountryCode||'',
+    city:a.City||a.Subregion||a.Region||'',
+    address:street,
+    full:a.LongLabel||a.Match_addr||street
   };
 }
 
 async function geocodeWithBigDataCloud(lat,lon){
   const url=`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=en`;
-  const response=await fetch(url);
+  const response=await fetch(url,{mode:'cors'});
   if(!response.ok) throw new Error('BigDataCloud failed');
   const data=await response.json();
   return {
-    country:data.countryName||'',
+    country:data.countryName||data.countryCode||'',
     city:data.city||data.locality||data.principalSubdivision||'',
-    address:[data.localityInfo?.informative?.[0]?.name||'',data.locality||''].filter(Boolean).join(', ')||data.locality||''
+    address:'',
+    full:[data.locality,data.city,data.principalSubdivision,data.countryName].filter(Boolean).join(', ')
   };
 }
 
 async function reverseGeocode(lat,lon){
-  try{return await geocodeWithNominatim(lat,lon);}catch(e){return await geocodeWithBigDataCloud(lat,lon);}
+  try{
+    return await geocodeWithArcGIS(lat,lon);
+  }catch(firstError){
+    return await geocodeWithBigDataCloud(lat,lon);
+  }
+}
+
+function setField(field,value){
+  if(!value) return;
+  field.value=value;
+  field.dispatchEvent(new Event('input',{bubbles:true}));
+  field.dispatchEvent(new Event('change',{bubbles:true}));
 }
 
 locateBtn.addEventListener('click',()=>{
   if(!window.isSecureContext){
-    status.textContent='Location only works on the secure HTTPS version of the site.';
+    status.textContent='Location only works on the HTTPS version of this site.';
     return;
   }
   if(!navigator.geolocation){
@@ -113,27 +135,39 @@ locateBtn.addEventListener('click',()=>{
     coordinates.value=`${lat}, ${lon}`;
 
     try{
-      status.textContent='Filling your address…';
+      status.textContent='Turning your GPS location into an address…';
       const result=await reverseGeocode(lat,lon);
-      if(result.country) country.value=result.country;
-      if(result.city) city.value=result.city;
-      if(result.address) address.value=result.address;
-      country.dispatchEvent(new Event('input',{bubbles:true}));
-      city.dispatchEvent(new Event('input',{bubbles:true}));
-      address.dispatchEvent(new Event('input',{bubbles:true}));
-      status.textContent='Location added. Check the country, city and street address before sending.';
+
+      setField(country,result.country);
+      setField(city,result.city);
+      setField(address,result.address||result.full||`GPS location: ${lat}, ${lon}`);
+
+      // If a provider only knows the area and not the exact street, keep a precise GPS fallback.
+      if(!country.value.trim()) country.value='Location detected';
+      if(!city.value.trim()) city.value='Location detected';
+      if(!address.value.trim()) address.value=`GPS location: ${lat}, ${lon}`;
+
+      status.textContent='Location filled in. Please check the address before submitting.';
       locateBtn.textContent='Location added ✓';
     }catch(error){
-      status.textContent=`Location found (${lat}, ${lon}), but the address lookup failed. Please type the address manually.`;
-      locateBtn.textContent='Location found ✓';
+      // Never throw away a successful GPS fix just because reverse geocoding failed.
+      if(!country.value.trim()) country.value='Location detected';
+      if(!city.value.trim()) city.value='Location detected';
+      address.value=`GPS location: ${lat}, ${lon}`;
+      status.textContent='GPS location added. Exact street lookup was unavailable, so please check or edit the address.';
+      locateBtn.textContent='Location added ✓';
     }finally{
       locateBtn.disabled=false;
     }
   },error=>{
-    const messages={1:'Location permission was denied. Allow location access in your browser and try again.',2:'Your device could not determine its location.',3:'Location lookup timed out. Try again.'};
+    const messages={
+      1:'Location permission was denied. Allow location access for this site and try again.',
+      2:'Your device could not determine its current location.',
+      3:'Location lookup timed out. Try again.'
+    };
     status.textContent=messages[error.code]||'Could not get your location. Please enter the address manually.';
     locateBtn.disabled=false;
-  },{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+  },{enableHighAccuracy:true,timeout:20000,maximumAge:0});
 });
 
 form.addEventListener('submit',e=>{
