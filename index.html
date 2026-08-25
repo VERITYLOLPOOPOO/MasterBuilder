@@ -26,7 +26,7 @@
       <div class="hero-copy">
         <p class="eyebrow"><span></span> CUSTOM PC BUILDING</p>
         <h1>Built clean.<br><em>Built yours.</em></h1>
-        <p class="lead">Already have a PCPartPicker list? Send it. Don't have one? Give MasterBuilder your budget and we'll design a custom PC around it.</p>
+        <p class="lead">Already have a PCPartPicker list? Send it. Don't know what parts you want yet? Open PC Creator and tell MasterBuilder what kind of machine you want.</p>
         <div class="hero-actions"><a class="button primary" href="#order">Start your build</a><a class="button ghost" href="#services">See pricing</a></div>
         <div class="trust-row"><span>Clear pricing</span><span>Custom builds</span><span>Ships from Morocco</span></div>
       </div>
@@ -40,9 +40,9 @@
     </section>
 
     <section id="services" class="section wrap">
-      <div class="section-head"><div><p class="eyebrow"><span></span> SERVICES</p><h2>Only pay for what you need.</h2></div><p>Bring your own parts list, or just tell us your budget and let MasterBuilder plan the system for you.</p></div>
+      <div class="section-head"><div><p class="eyebrow"><span></span> SERVICES</p><h2>Only pay for what you need.</h2></div><p>Bring your own parts list, or use PC Creator and let MasterBuilder plan the system around your needs.</p></div>
       <div class="cards">
-        <article class="service-card"><div class="card-top"><span>01</span><b>$50</b></div><h3>PC Assembly</h3><p>Hardware assembly using your compatible parts or a build planned around your budget.</p><ul><li>Component installation</li><li>Basic build check</li><li>Clean final assembly</li></ul></article>
+        <article class="service-card"><div class="card-top"><span>01</span><b>$50</b></div><h3>PC Assembly</h3><p>Hardware assembly using your compatible parts or a custom build created for you.</p><ul><li>Component installation</li><li>Basic build check</li><li>Clean final assembly</li></ul></article>
         <article class="service-card featured"><div class="card-top"><span>02</span><b>$75</b></div><h3>Wiring</h3><p>Cable routing and cable management for a cleaner finished system.</p><ul><li>Power cable routing</li><li>Front-panel organization</li><li>Cleaner presentation</li></ul></article>
         <article class="service-card"><div class="card-top"><span>03</span><b>$150</b></div><h3>Ship & Build</h3><p>Send in the parts and request a complete assembly before delivery.</p><ul><li>Parts received for build</li><li>Assembly service</li><li>Return delivery coordination</li></ul></article>
       </div>
@@ -66,7 +66,7 @@
       <div class="order-intro">
         <p class="eyebrow"><span></span> BUILD REQUEST</p>
         <h2>Send the build.</h2>
-        <p>Use a PCPartPicker list if you already know the parts, or simply enter your total PC budget and MasterBuilder can design the build for you.</p>
+        <p>Paste your PCPartPicker list if you already have a build in mind. If you don't, open PC Creator and tell us what you want instead.</p>
         <div class="estimate-card"><small>CURRENT SERVICE ESTIMATE</small><strong id="bigTotal">$0</strong><span>parts and carrier/customs costs not included</span></div>
       </div>
 
@@ -80,9 +80,36 @@
         <label><span>Name</span><input name="Customer Name" autocomplete="name" placeholder="Your name" required></label>
 
         <div class="field-title">How should we build your PC?</div>
-        <label><span>PCPartPicker list <small>(optional)</small></span><input id="pcpp" type="url" name="PCPartPicker Link" placeholder="https://pcpartpicker.com/list/..."><small id="pcppHelp">Already picked your parts? Paste the public list here.</small></label>
+        <label><span>PCPartPicker list <small>(optional if using PC Creator)</small></span><input id="pcpp" type="url" name="PCPartPicker Link" placeholder="https://pcpartpicker.com/list/..."><small id="pcppHelp">Already picked your parts? Paste the public list here.</small></label>
 
-        <label><span>PC budget <small>(optional if you added a PCPartPicker list)</small></span><input id="budget" type="number" name="PC Budget" min="100" step="1" placeholder="Example: 1500"><small>Give us your budget and we will create the best custom PC we can around it.</small></label>
+        <details class="pc-creator" id="pcCreator">
+          <summary><span><b>PC Creator</b><small>Don't have a PC in mind? Tell us what you want and we'll design it.</small></span><strong>OPEN +</strong></summary>
+          <div class="creator-body">
+            <div class="creator-intro"><span class="creator-badge">CUSTOM BUILD</span><p>Give MasterBuilder your budget and preferences. We'll choose the parts and create the PC around them.</p></div>
+
+            <div class="form-grid two">
+              <label><span>PC budget</span><input id="budget" type="number" name="PC Creator — Budget" min="100" step="1" placeholder="Example: 1500"><small>Budget for the computer itself.</small></label>
+              <label><span>Build color</span><select name="PC Creator — Color"><option value="No preference">No preference</option><option>Black</option><option>White</option><option>Black & white</option><option>Pink</option><option>Blue</option><option>Red</option><option>Custom / other</option></select></label>
+            </div>
+
+            <div class="form-grid two">
+              <label><span>Main use</span><select name="PC Creator — Main Use"><option>Gaming</option><option>Gaming + streaming</option><option>School / everyday use</option><option>Video editing</option><option>3D / rendering</option><option>AI / development</option><option>Cybersecurity / virtual machines</option><option>Mixed use</option></select></label>
+              <label><span>Gaming target</span><select name="PC Creator — Gaming Target"><option value="Not important">Not important</option><option>1080p high FPS</option><option>1440p high FPS</option><option>4K gaming</option><option>Maximum performance</option></select></label>
+            </div>
+
+            <div class="form-grid two">
+              <label><span>RGB style</span><select name="PC Creator — RGB"><option>No preference</option><option>No RGB</option><option>Subtle RGB</option><option>Lots of RGB</option><option>Maximum RGB</option></select></label>
+              <label><span>PC size</span><select name="PC Creator — Size"><option>No preference</option><option>Small / compact</option><option>Mid tower</option><option>Large showcase build</option></select></label>
+            </div>
+
+            <div class="form-grid two">
+              <label><span>Noise preference</span><select name="PC Creator — Noise"><option>No preference</option><option>As quiet as possible</option><option>Balanced</option><option>Performance first</option></select></label>
+              <label><span>Brand preference</span><select name="PC Creator — Brand Preference"><option>No preference</option><option>AMD CPU preferred</option><option>Intel CPU preferred</option><option>NVIDIA GPU preferred</option><option>AMD GPU preferred</option></select></label>
+            </div>
+
+            <label><span>Creator notes</span><textarea name="PC Creator — Extra Preferences" rows="4" placeholder="Example: lots of storage, Wi-Fi required, glass case, quiet fans, specific games, upgradeability, etc."></textarea></label>
+          </div>
+        </details>
 
         <div class="field-title">Services</div>
         <div class="option-grid">
@@ -112,10 +139,10 @@
           <option value="1000">Another continent — $1,000</option>
         </select></label>
 
-        <label><span>Build notes</span><textarea name="Customer Notes" rows="5" placeholder="What games do you play? White or black build? RGB? Quiet PC? Streaming? Workstation? Anything else..."></textarea></label>
+        <label><span>Build notes</span><textarea name="Customer Notes" rows="5" placeholder="Special requests, timing, parts you already own, anything else..."></textarea></label>
 
         <div class="form-total"><div><small>ESTIMATED SERVICE TOTAL</small><strong id="total">$0</strong></div><button class="button primary submit" type="submit">Send build request</button></div>
-        <p class="form-note">No customer email is required. Your request sends the selected parts or budget, services, delivery information and notes to MasterBuilder. Final parts pricing and shipping are confirmed separately before work starts.</p>
+        <p class="form-note">Use either a PCPartPicker list or PC Creator. No customer email is required. Final parts pricing and shipping are confirmed separately before work starts.</p>
       </form>
     </section>
   </main>
