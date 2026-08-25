@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="MasterBuilder custom PC assembly, wiring and delivery services.">
+  <meta name="description" content="MasterBuilder custom PC assembly, wiring, custom part selection and delivery services from Morocco.">
   <meta name="theme-color" content="#090a0d">
   <title>MasterBuilder — Custom PC Building</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,9 +26,9 @@
       <div class="hero-copy">
         <p class="eyebrow"><span></span> CUSTOM PC BUILDING</p>
         <h1>Built clean.<br><em>Built yours.</em></h1>
-        <p class="lead">Send your PCPartPicker list. Choose assembly, wiring and delivery. MasterBuilder turns your parts list into a finished system.</p>
+        <p class="lead">Already have a PCPartPicker list? Send it. Don't have one? Give MasterBuilder your budget and we'll design a custom PC around it.</p>
         <div class="hero-actions"><a class="button primary" href="#order">Start your build</a><a class="button ghost" href="#services">See pricing</a></div>
-        <div class="trust-row"><span>Clear pricing</span><span>Custom builds</span><span>Worldwide requests</span></div>
+        <div class="trust-row"><span>Clear pricing</span><span>Custom builds</span><span>Ships from Morocco</span></div>
       </div>
       <div class="hero-panel">
         <div class="terminal-top"><i></i><i></i><i></i><span>BUILD_STATUS</span></div>
@@ -40,9 +40,9 @@
     </section>
 
     <section id="services" class="section wrap">
-      <div class="section-head"><div><p class="eyebrow"><span></span> SERVICES</p><h2>Only pay for what you need.</h2></div><p>Start with assembly, add clean cable management, or send the parts in for a complete build.</p></div>
+      <div class="section-head"><div><p class="eyebrow"><span></span> SERVICES</p><h2>Only pay for what you need.</h2></div><p>Bring your own parts list, or just tell us your budget and let MasterBuilder plan the system for you.</p></div>
       <div class="cards">
-        <article class="service-card"><div class="card-top"><span>01</span><b>$50</b></div><h3>PC Assembly</h3><p>Hardware assembly using your compatible parts and PCPartPicker list.</p><ul><li>Component installation</li><li>Basic build check</li><li>Clean final assembly</li></ul></article>
+        <article class="service-card"><div class="card-top"><span>01</span><b>$50</b></div><h3>PC Assembly</h3><p>Hardware assembly using your compatible parts or a build planned around your budget.</p><ul><li>Component installation</li><li>Basic build check</li><li>Clean final assembly</li></ul></article>
         <article class="service-card featured"><div class="card-top"><span>02</span><b>$75</b></div><h3>Wiring</h3><p>Cable routing and cable management for a cleaner finished system.</p><ul><li>Power cable routing</li><li>Front-panel organization</li><li>Cleaner presentation</li></ul></article>
         <article class="service-card"><div class="card-top"><span>03</span><b>$150</b></div><h3>Ship & Build</h3><p>Send in the parts and request a complete assembly before delivery.</p><ul><li>Parts received for build</li><li>Assembly service</li><li>Return delivery coordination</li></ul></article>
       </div>
@@ -50,7 +50,7 @@
 
     <section id="delivery" class="section delivery-section">
       <div class="wrap">
-        <div class="section-head inverse"><div><p class="eyebrow"><span></span> DELIVERY</p><h2>Distance-based pricing.</h2></div><p>Choose the closest matching delivery range when you send your request.</p></div>
+        <div class="section-head inverse"><div><p class="eyebrow"><span></span> DELIVERY</p><h2>Ships from Morocco.</h2></div><p>Every completed system ships from Morocco. Choose the delivery range that best matches your destination.</p></div>
         <div class="delivery-list">
           <div><span>Local</span><p>Within 100 miles</p><strong>FREE</strong></div>
           <div><span>Extended</span><p>Within 500 miles</p><strong>$5</strong></div>
@@ -58,7 +58,7 @@
           <div><span>International</span><p>Another country</p><strong>$100</strong></div>
           <div><span>Intercontinental</span><p>Another continent</p><strong>$1,000</strong></div>
         </div>
-        <p class="fineprint">These are service delivery estimates. Carrier costs, insurance, customs, taxes and import fees can be additional and are confirmed before any parts are sent.</p>
+        <p class="fineprint">Service delivery estimates are calculated from Morocco. Carrier costs, insurance, customs, taxes and import fees can be additional and are confirmed before any parts are sent.</p>
       </div>
     </section>
 
@@ -66,8 +66,8 @@
       <div class="order-intro">
         <p class="eyebrow"><span></span> BUILD REQUEST</p>
         <h2>Send the build.</h2>
-        <p>Drop your PCPartPicker link, tell us what you want done, and submit the request. You’ll see the estimate update before you send it.</p>
-        <div class="estimate-card"><small>CURRENT ESTIMATE</small><strong id="bigTotal">$0</strong><span>before carrier/customs costs</span></div>
+        <p>Use a PCPartPicker list if you already know the parts, or simply enter your total PC budget and MasterBuilder can design the build for you.</p>
+        <div class="estimate-card"><small>CURRENT SERVICE ESTIMATE</small><strong id="bigTotal">$0</strong><span>parts and carrier/customs costs not included</span></div>
       </div>
 
       <form id="buildForm" class="order-form" action="https://formsubmit.co/i.highkey.do.yt.gng@gmail.com" method="POST">
@@ -75,14 +75,14 @@
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://veritylolpoopoo.github.io/MasterBuilder/thanks.html">
-        <input type="hidden" id="estimateField" name="Estimated Total" value="$0">
+        <input type="hidden" id="estimateField" name="Estimated Service Total" value="$0">
 
-        <div class="form-grid two">
-          <label><span>Name</span><input name="Customer Name" autocomplete="name" placeholder="Your name" required></label>
-          <label><span>Email</span><input type="email" name="Customer Email" autocomplete="email" placeholder="you@example.com" required></label>
-        </div>
+        <label><span>Name</span><input name="Customer Name" autocomplete="name" placeholder="Your name" required></label>
 
-        <label><span>PCPartPicker list</span><input id="pcpp" type="url" name="PCPartPicker Link" placeholder="https://pcpartpicker.com/list/..." required><small id="pcppHelp">Paste the public link to your parts list.</small></label>
+        <div class="field-title">How should we build your PC?</div>
+        <label><span>PCPartPicker list <small>(optional)</small></span><input id="pcpp" type="url" name="PCPartPicker Link" placeholder="https://pcpartpicker.com/list/..."><small id="pcppHelp">Already picked your parts? Paste the public list here.</small></label>
+
+        <label><span>PC budget <small>(optional if you added a PCPartPicker list)</small></span><input id="budget" type="number" name="PC Budget" min="100" step="1" placeholder="Example: 1500"><small>Give us your budget and we will create the best custom PC we can around it.</small></label>
 
         <div class="field-title">Services</div>
         <div class="option-grid">
@@ -91,34 +91,36 @@
           <label class="option"><input class="priced" type="checkbox" name="Ship and Build" value="Yes — $150" data-price="150"><span><b>Ship & Build</b><small>Send parts for assembly</small></span><strong>$150</strong></label>
         </div>
 
+        <div class="field-title">Delivery address</div>
         <div class="form-grid two">
-          <label><span>Country / region</span><input id="country" name="Country or Region" placeholder="Country or region" autocomplete="country-name" required></label>
-          <label><span>City</span><input id="city" name="City" placeholder="City" autocomplete="address-level2" required></label>
+          <label><span>Country / region</span><input id="country" name="Country or Region" placeholder="Country or region" autocomplete="country-name"></label>
+          <label><span>City</span><input id="city" name="City" placeholder="City" autocomplete="address-level2"></label>
         </div>
+        <label><span>Street address</span><input id="address" name="Street Address" placeholder="Street, building, apartment, etc." autocomplete="street-address"></label>
 
         <div class="location-row">
-          <button class="location-btn" id="locateBtn" type="button">Use my current location</button>
+          <button class="location-btn" id="locateBtn" type="button">Use my current location instead</button>
           <input id="coordinates" name="Approximate Coordinates" type="hidden">
-          <span id="locationStatus">Optional — your browser will ask permission.</span>
+          <span id="locationStatus">Enter your address above, or share your current location.</span>
         </div>
 
-        <label><span>Delivery range</span><select id="shipping" name="Delivery Range" required>
-          <option value="0" data-label="Within 100 miles — FREE">Within 100 miles — FREE</option>
-          <option value="5" data-label="Within 500 miles — $5">Within 500 miles — $5</option>
-          <option value="50" data-label="Another city — $50">Another city — $50</option>
-          <option value="100" data-label="Another country — $100">Another country — $100</option>
-          <option value="1000" data-label="Another continent — $1,000">Another continent — $1,000</option>
+        <label><span>Delivery range — from Morocco</span><select id="shipping" name="Delivery Range" required>
+          <option value="0">Within 100 miles — FREE</option>
+          <option value="5">Within 500 miles — $5</option>
+          <option value="50">Another city — $50</option>
+          <option value="100">Another country — $100</option>
+          <option value="1000">Another continent — $1,000</option>
         </select></label>
 
-        <label><span>Build notes</span><textarea name="Customer Notes" rows="5" placeholder="Case preferences, RGB, special requests, timing, anything else..."></textarea></label>
+        <label><span>Build notes</span><textarea name="Customer Notes" rows="5" placeholder="What games do you play? White or black build? RGB? Quiet PC? Streaming? Workstation? Anything else..."></textarea></label>
 
         <div class="form-total"><div><small>ESTIMATED SERVICE TOTAL</small><strong id="total">$0</strong></div><button class="button primary submit" type="submit">Send build request</button></div>
-        <p class="form-note">Submitting sends your request details to MasterBuilder by email. Final pricing and shipping are confirmed before work starts.</p>
+        <p class="form-note">No customer email is required. Your request sends the selected parts or budget, services, delivery information and notes to MasterBuilder. Final parts pricing and shipping are confirmed separately before work starts.</p>
       </form>
     </section>
   </main>
 
-  <footer><div class="wrap footer-inner"><div class="brand"><span class="mark">MB</span><span>MasterBuilder</span></div><p>Custom PC building, wiring and delivery requests.</p><a href="#top">Back to top ↑</a></div></footer>
+  <footer><div class="wrap footer-inner"><div class="brand"><span class="mark">MB</span><span>MasterBuilder</span></div><p>Custom PCs planned, built and shipped from Morocco.</p><a href="#top">Back to top ↑</a></div></footer>
   <script src="script.js"></script>
 </body>
 </html>
